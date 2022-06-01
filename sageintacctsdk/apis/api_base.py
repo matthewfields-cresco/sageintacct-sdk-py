@@ -323,6 +323,16 @@ class ApiBase:
 
         return self.format_and_send_request(payload)
 
+    def read_by_name(x, keys: list = None, fields: list = None):
+        data = {
+            'readByName': {
+                'object': x.__dimension,
+                'keys': ','.join(keys),
+                'fields': ','.join(fields) if fields else '*'
+            }
+        }
+        return x.format_and_send_request(data)    
+    
     def get(self, field: str, value: str, fields: list = None):
         """Get data from Sage Intacct based on filter.
 
